@@ -24,11 +24,14 @@ class TestBooksCollector:
         book.set_book_genre('Война миров', 'Фантастика')
         assert book.get_book_genre('Война миров') == 'Фантастика'
 
+
     def test_get_book_genre(self, book):
         book.add_new_book('Зомби в городе')
         book.set_book_genre('Зомби в городе', 'Ужасы')
         book_genre = book.get_book_genre('Зомби в городе')
         assert book_genre == 'Ужасы'
+
+
 
     def test_get_books_with_specific_genre(self, book):
         book.add_new_book('Люди и пришельцы')
