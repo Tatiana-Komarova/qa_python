@@ -31,13 +31,13 @@ class TestBooksCollector:
         assert book_genre == 'Ужасы'
 
     def test_get_books_with_specific_genre(self, book):
-        book.add_new_book('Истории о Шерлоке')
+        book.add_new_book('Люди и пришельцы')
         book.add_new_book('Война миров')
-        book.set_book_genre('Истории о Шерлоке', 'Детективы')
+        book.set_book_genre('Люди и пришельцы', 'Фантастика')
         book.set_book_genre('Война миров', 'Фантастика')
-        specific_genre = book.get_books_genre()
-        assert 'Истории о Шерлоке' in specific_genre
-        assert 'Война миров' in specific_genre
+        books = book.get_books_with_specific_genre('Фантастика')
+        assert 'Люди и пришельцы' in books
+        assert 'Война миров' in books
 
     def test_get_books_for_children(self, book):
         children_books = ['Летучий корабль', 'Колобок']
@@ -59,14 +59,12 @@ class TestBooksCollector:
 
     def test_add_book_in_favorites(self, book):
         book.add_new_book('Война миров')
-        book.set_book_genre('Война миров','Фантастика')
         book.add_book_in_favorites('Война миров')
         favorite_books = book.get_list_of_favorites_books()
         assert 'Война миров' in favorite_books
 
     def test_delete_book_from_favorites(self, book):
         book.add_new_book('Зомби в городе')
-        book.set_book_genre('Зомби в городе', 'Ужасы')
         book.add_book_in_favorites('Зомби в городе')
         favorite_books = book.get_list_of_favorites_books()
         book.delete_book_from_favorites('Зомби в городе')
@@ -74,7 +72,6 @@ class TestBooksCollector:
 
     def test_get_list_of_favorities_books(self, book):
         book.add_new_book('Летучий корабль')
-        book.set_book_genre('Летучий корабль', 'Мультфильмы')
         book.add_book_in_favorites('Летучий корабль')
         favorite_books = book.get_list_of_favorites_books()
         assert 'Летучий корабль' in favorite_books
