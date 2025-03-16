@@ -31,6 +31,14 @@ class TestBooksCollector:
         book_genre = book.get_book_genre('Зомби в городе')
         assert book_genre == 'Ужасы'
 
+    def test_get_books_genre(self, book):
+        book.add_new_book('Война миров')
+        book.add_new_book('Зомби в городе')
+        book.set_book_genre('Война миров', 'Фантастика')
+        book.set_book_genre('Зомби в городе', 'Ужасы')
+        result = {'Война миров': 'Фантастика',
+                  'Зомби в городе': 'Ужасы'}
+        assert book.get_books_genre() == result
 
 
     def test_get_books_with_specific_genre(self, book):
